@@ -1,0 +1,256 @@
+@import "tailwindcss";
+
+@theme {
+	--font-sans: "Inter", "SF Pro Display", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	--font-mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+
+	--color-ink-950: #07070a;
+	--color-ink-900: #0b0b10;
+	--color-ink-850: #101017;
+	--color-ink-800: #15151e;
+	--color-ink-700: #1d1d29;
+	--color-ink-600: #2a2a3a;
+	--color-ink-400: #6b6b80;
+	--color-ink-300: #9a9ab0;
+	--color-ink-200: #c9c9d6;
+
+	--color-ava-300: #ff8d90;
+	--color-ava-400: #ff5a5f;
+	--color-ava-500: #e84142;
+	--color-ava-600: #c42a2f;
+	--color-ava-700: #8f1b20;
+
+	--color-clear-400: #34d399;
+	--color-clear-500: #10b981;
+	--color-cipher-400: #fbbf24;
+
+	--animate-shimmer: shimmer 2.4s linear infinite;
+	--animate-fade-up: fade-up 0.45s ease-out both;
+	--animate-scramble: scramble 1.6s steps(8) infinite;
+
+	@keyframes shimmer {
+		0% { background-position: -200% 0; }
+		100% { background-position: 200% 0; }
+	}
+	@keyframes fade-up {
+		from { opacity: 0; transform: translateY(8px); }
+		to { opacity: 1; transform: none; }
+	}
+	@keyframes scramble {
+		0%, 100% { opacity: 1; }
+		50% { opacity: 0.72; }
+	}
+}
+
+:root {
+	color-scheme: dark;
+}
+
+html,
+body,
+#root {
+	min-height: 100%;
+}
+
+body {
+	@apply bg-ink-950 text-ink-200 font-sans antialiased;
+}
+
+::selection {
+	background: rgb(232 65 66 / 0.35);
+}
+
+.grid-bg {
+	background-image:
+		linear-gradient(rgb(255 255 255 / 0.025) 1px, transparent 1px),
+		linear-gradient(90deg, rgb(255 255 255 / 0.025) 1px, transparent 1px);
+	background-size: 32px 32px;
+}
+
+.card {
+	/* Fondo casi opaco en vez de backdrop-filter: mismo look, sin re-blur del fondo en cada frame. */
+	@apply rounded-2xl border border-white/[0.07] bg-ink-850/95 shadow-[0_1px_0_0_rgb(255_255_255/0.04)_inset,0_20px_40px_-20px_rgb(0_0_0/0.6)];
+}
+
+.input {
+	@apply w-full rounded-xl border border-white/10 bg-ink-900 px-3.5 py-2.5 text-sm text-white placeholder:text-ink-400 outline-none transition focus:border-ava-500/60 focus:ring-4 focus:ring-ava-500/10;
+}
+
+.label {
+	@apply mb-1.5 block text-xs font-medium uppercase tracking-wider text-ink-400;
+}
+
+.cipher-text {
+	@apply font-mono text-cipher-400/90;
+	text-shadow: 0 0 12px rgb(251 191 36 / 0.25);
+}
+
+.clear-text {
+	@apply font-mono text-clear-400;
+	text-shadow: 0 0 14px rgb(52 211 153 / 0.35);
+}
+
+.shimmer {
+	background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.06), transparent);
+	background-size: 200% 100%;
+	@apply animate-shimmer;
+}
+
+/* ── 3D ───────────────────────────────────────────────────────────── */
+.scene3d {
+	perspective: 1100px;
+	perspective-origin: 50% 40%;
+}
+.stage3d {
+	position: absolute;
+	inset: 0;
+	transform-style: preserve-3d;
+	transform: rotateX(calc(18deg + var(--rx, 0deg))) rotateY(calc(-14deg + var(--ry, 0deg))) rotateZ(3deg);
+	transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+	will-change: transform;
+}
+.layer3d {
+	position: absolute;
+	inset: 0;
+	transform-style: preserve-3d;
+}
+.glass {
+	@apply rounded-2xl border border-white/10 bg-ink-850/90;
+	box-shadow:
+		0 24px 40px -24px rgb(0 0 0 / 0.85),
+		inset 0 1px 0 rgb(255 255 255 / 0.07);
+}
+.glass-clear {
+	@apply border-clear-500/30;
+	background: linear-gradient(160deg, rgb(16 185 129 / 0.14), rgb(16 16 23 / 0.85) 55%);
+	box-shadow:
+		0 24px 40px -24px rgb(0 0 0 / 0.85),
+		0 0 30px -12px rgb(16 185 129 / 0.45),
+		inset 0 1px 0 rgb(255 255 255 / 0.1);
+}
+.float-a { animation: float 7s ease-in-out infinite; }
+.float-b { animation: float 6s ease-in-out infinite -2s; }
+.float-c { animation: float 8s ease-in-out infinite -4s; }
+@keyframes float {
+	0%, 100% { translate: 0 0; }
+	50% { translate: 0 -10px; }
+}
+/* Escena fuera de pantalla o pestaña oculta → animaciones en pausa (0 trabajo de GPU). */
+.paused, .paused * { animation-play-state: paused !important; }
+
+.light-shaft {
+	position: absolute;
+	left: -30%;
+	top: 38%;
+	width: 160%;
+	height: 22%;
+	transform: rotate(-28deg);
+	/* Sin mix-blend-mode: un gradiente con alfa da el mismo efecto sin forzar re-composición. */
+	background: linear-gradient(180deg, transparent, rgb(167 243 208 / 0.1) 35%, rgb(236 253 245 / 0.16) 50%, rgb(167 243 208 / 0.1) 65%, transparent);
+	animation: shaft 7s ease-in-out infinite;
+	will-change: transform;
+}
+@keyframes shaft {
+	0%, 100% { translate: 0 -14%; opacity: 0.75; }
+	50% { translate: 0 14%; opacity: 1; }
+}
+.particle { animation: drift 9s ease-in-out infinite; opacity: 0.55; }
+@keyframes drift {
+	0%, 100% { translate: 0 0; opacity: 0.25; }
+	50% { translate: 10px -18px; opacity: 0.7; }
+}
+
+/* Tilt cards */
+.tilt {
+	perspective: 900px;
+}
+.tilt-inner {
+	position: relative;
+	height: 100%;
+	transform-style: preserve-3d;
+	transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+	transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+	will-change: transform;
+}
+.tilt-glare {
+	pointer-events: none;
+	position: absolute;
+	inset: 0;
+	border-radius: 1rem;
+	opacity: 0;
+	transition: opacity 0.3s;
+	background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgb(255 255 255 / 0.07), transparent 45%);
+}
+.tilt:hover .tilt-glare { opacity: 1; }
+.tilt .lift { transform: translateZ(28px); }
+
+/* Ambient */
+/* Gradientes radiales (ya difusos) en vez de filter: blur(90px) sobre 60vmax: el GPU no
+   recalcula un blur gigante; sólo se compone un transform. */
+.aurora {
+	position: absolute;
+	width: 70vmax;
+	height: 70vmax;
+	will-change: transform;
+}
+.aurora-a { background: radial-gradient(closest-side, rgb(232 65 66 / 0.2), transparent); top: -35vmax; right: -20vmax; animation: aurora 26s ease-in-out infinite alternate; }
+.aurora-b { background: radial-gradient(closest-side, rgb(16 185 129 / 0.1), transparent); bottom: -40vmax; left: -25vmax; animation: aurora 32s ease-in-out infinite alternate-reverse; }
+@keyframes aurora {
+	to { transform: translate3d(-8vmax, 6vmax, 0) scale(1.1); }
+}
+
+
+/* Borde animado (conic) para elementos destacados */
+.ring-glow {
+	position: relative;
+	isolation: isolate;
+}
+.ring-glow::before {
+	content: "";
+	position: absolute;
+	inset: -1px;
+	z-index: -1;
+	border-radius: inherit;
+	padding: 1px;
+	background: conic-gradient(from var(--a, 0deg), transparent 60%, rgb(52 211 153 / 0.85), transparent 80%);
+	-webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+	-webkit-mask-composite: xor;
+	mask-composite: exclude;
+	animation: ring 4s linear infinite;
+}
+@property --a {
+	syntax: "<angle>";
+	inherits: false;
+	initial-value: 0deg;
+}
+@keyframes ring {
+	to { --a: 360deg; }
+}
+
+/* Secciones bajo el pliegue: el navegador no las pinta hasta que se acercan al viewport. */
+.cv-auto {
+	content-visibility: auto;
+	contain-intrinsic-size: auto 640px;
+}
+
+/* Accesibilidad */
+:focus-visible {
+	outline: 2px solid rgb(232 65 66 / 0.8);
+	outline-offset: 2px;
+	border-radius: 0.6rem;
+}
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+	}
+}
+
+/* scrollbar */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: #2a2a3a transparent;
+}

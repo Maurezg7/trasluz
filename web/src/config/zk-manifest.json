@@ -1,0 +1,8 @@
+{
+  "/zk/registration/circuit_final.zkey": "c55b573699363d6103bb8e3b3292e84dd175afce1bbb23e0ba785cef8c2eec43",
+  "/zk/registration/registration.wasm": "4c79b4d561b81c7ab3a516a57d71f941e4e5f7722b401eaf71b0a01aea2e4e39",
+  "/zk/transfer/transfer.wasm": "0197ef3d8f74d6024d5431417f6a20a03f444389e44c462c8f2e7d9d94fe2072",
+  "/zk/transfer/transfer.zkey": "450a850d649c44dd01d89b5fe09c4fd9282560ee35da9821a9f84d683d65dfeb",
+  "/zk/withdraw/circuit_final.zkey": "9d687453c9d1819beb2da02591cbac97f8d1832c7d45423c2fdea10fb5104da0",
+  "/zk/withdraw/withdraw.wasm": "c94756e6b422646396d0a7f1498bb0799866f4367e562ee569b1e84b1579bc47"
+}

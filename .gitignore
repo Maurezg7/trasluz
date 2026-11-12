@@ -1,0 +1,23 @@
+node_modules
+.env
+.env.*
+!.env.example
+*.DS_Store
+
+# secrets (auditor viewing key, demo keys) — NUNCA al repo
+.secrets/
+
+# hardhat
+contracts/cache
+contracts/artifacts
+contracts/typechain-types
+contracts/coverage
+contracts/coverage.json
+contracts/deployments/localhost.json
+contracts/deployments/hardhat.json
+web/src/config/deployments.local.json
+
+# web
+web/dist
+web/public/zk
+deck/.video/

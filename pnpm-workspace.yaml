@@ -1,0 +1,22 @@
+packages:
+  - packages/*
+  - contracts
+  - web
+
+# Seguridad de supply chain: no instalar versiones publicadas hace menos de 7 días.
+minimumReleaseAge: 10080
+
+# Scripts de instalación: sólo esbuild (binario de Vite). Los addons nativos opcionales
+# tienen fallback en JS puro, así que no ejecutan código en la instalación.
+allowBuilds:
+  esbuild: true
+  bufferutil: false
+  keccak: false
+  secp256k1: false
+  utf-8-validate: false
+
+# Peers transitivos de WalletConnect que declaran rangos viejos pero funcionan con estas versiones.
+peerDependencyRules:
+  allowedVersions:
+    use-sync-external-store>react: "19"
+    abitype>zod: "4"

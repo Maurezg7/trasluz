@@ -1,0 +1,32 @@
+{
+  "name": "@trasluz/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync-zk": "node scripts/sync-zk.mjs",
+    "dev": "node scripts/sync-zk.mjs && vite",
+    "build": "node scripts/sync-zk.mjs && tsc --noEmit -p . && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit -p ."
+  },
+  "dependencies": {
+    "@tanstack/react-query": "5.105.1",
+    "@trasluz/zk": "workspace:*",
+    "lucide-react": "1.66.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-router-dom": "7.18.5",
+    "viem": "2.57.14",
+    "wagmi": "2.19.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.3.3",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "5.2.0",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.9.3",
+    "vite": "7.3.7"
+  }
+}
