@@ -6,6 +6,8 @@
 <p align="center"><b>Liquidación B2B confidencial sobre Avalanche eERC, con ventana para el regulador.</b><br/>
 Track Avalanche · Argentina Space 2026</p>
 
+<p align="center"><b>Demo en vivo (Avalanche Fuji): <a href="https://trasluz-2av.pages.dev">trasluz-2av.pages.dev</a></b></p>
+
 ---
 
 > **¿Por qué "Trasluz"?** *Mirar algo al trasluz* es ponerlo contra la luz para ver lo que a simple vista
@@ -150,6 +152,8 @@ pnpm build                     # frontend estático en web/dist (servir con cual
 Para habilitar entidades: `KYC_ADDRESSES=0x..,0x..` en el deploy o desde **Administración** en la app (owner).
 
 ### Desplegado en Fuji (chain 43113)
+
+Frontend público: **<https://trasluz-2av.pages.dev>** (build estático de `web/dist` en Cloudflare Pages, con los headers de [`web/security-headers.ts`](web/security-headers.ts)). La vista pública y el portal del auditor funcionan sin wallet.
 
 Deploy en el bloque `60977616`. Las direcciones completas (verifiers, BabyJubJub, implementación del vault) están en [`addresses.json`](addresses.json).
 

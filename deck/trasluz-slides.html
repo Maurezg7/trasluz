@@ -97,7 +97,7 @@ td:first-child { color: #fff; font-weight: 600; }
 .road li b { color: #fff; }
 .end { display: flex; flex-direction: column; justify-content: center; }
 .end .claim { font-size: 47px; font-weight: 800; line-height: 1.12; letter-spacing: -.025em; } .end .claim em { font-style: normal; color: var(--clear); } .end .claim b { color: var(--ava4); }
-.end .link { margin-top: 40px; font-size: 30px; color: var(--ink200); } .end .link .mono { color: #fff; }
+.end .link { margin-top: 40px; font-size: 30px; color: var(--ink200); } .end .link .mono { color: #fff; } .end .link + .link { margin-top: 14px; }
 </style>
 </head>
 <body>
@@ -247,6 +247,7 @@ td:first-child { color: #fff; font-weight: 600; }
           <div class="stat"><div class="big" style="color:var(--clear)">2/2</div><div class="lbl">obligaciones conciliadas</div></div>
           <div class="stat"><div class="big">22</div><div class="lbl">tests con pruebas ZK reales</div></div>
         </div>
+        <p style="font-size:22px;color:var(--ink300);margin-bottom:14px">App en vivo: <a class="mono" style="color:var(--clear)" href="https://trasluz-2av.pages.dev">trasluz-2av.pages.dev</a></p>
         <p style="font-size:22px;color:var(--ink300);margin-bottom:14px">Obligación #2 · 18.750,25 USDC · transacciones:</p>
         <div class="txs">
           <a class="tx" href="https://testnet.snowtrace.io/tx/0x737ff065404a7597b47d252860122100c13e2b8dac93841cee291f393be645ba">Depósito<span class="mono">0x737f…45ba</span></a>
@@ -296,6 +297,7 @@ td:first-child { color: #fff; font-weight: 600; }
     <div class="end">
       <svg style="width:110px;height:110px;margin-bottom:36px;filter:drop-shadow(0 0 50px rgba(232,65,66,.45))"><use href="#logo"/></svg>
       <p class="claim"><b>Confidencial</b> para el mercado.<br/><em>Transparente</em> para el regulador.</p>
+      <p class="link">Demo: <a class="mono" href="https://trasluz-2av.pages.dev">trasluz-2av.pages.dev</a></p>
       <p class="link">Código: <a class="mono" href="https://github.com/Maurezg7/trasluz">github.com/Maurezg7/trasluz</a></p>
     </div>
   </div>
