@@ -1,9 +1,9 @@
 import { ArrowRight, Building2, Check, FileLock2, Globe2, Lock, PackageCheck, ScanEye, ShieldCheck, Vault } from "lucide-react";
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { Tilt } from "../components/fx";
+import { Reveal, Tilt } from "../components/fx";
 import { Hero3D } from "../components/Hero3D";
-import { Badge, Card } from "../components/ui";
+import { Addr, Badge, Card } from "../components/ui";
 import { useDeployment, useEntidades, useObligaciones } from "../hooks/useCtx";
 
 function RoleCard({ to, icon, title, desc, cta }: { to: string; icon: ReactNode; title: string; desc: string; cta: string }) {
@@ -45,7 +45,7 @@ export default function Home() {
 						Track Avalanche · eERC + escrow + auditor designado
 					</Badge>
 					<h1 className="mt-5 text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-[56px]">
-						Liquidación B2B <span className="bg-gradient-to-r from-ava-300 via-ava-400 to-ava-600 bg-clip-text text-transparent">confidencial</span>,
+						Liquidación B2B <span className="text-flow">confidencial</span>,
 						<br />
 						con ventana para el regulador.
 					</h1>
@@ -56,7 +56,7 @@ export default function Home() {
 					<div className="mt-8 flex flex-wrap gap-3">
 						<Link
 							to="/empresa"
-							className="inline-flex h-12 items-center gap-2 rounded-xl bg-gradient-to-b from-ava-400 to-ava-600 px-6 text-[15px] font-medium text-white shadow-[0_10px_30px_-10px_rgb(232_65_66/0.7)] transition hover:brightness-110"
+							className="btn-shine inline-flex h-12 items-center gap-2 rounded-xl bg-gradient-to-b from-ava-400 to-ava-600 px-6 text-[15px] font-medium text-white shadow-[0_10px_30px_-10px_rgb(232_65_66/0.7)] transition hover:brightness-110"
 						>
 							Empezar como empresa <ArrowRight className="size-4" />
 						</Link>
@@ -79,6 +79,7 @@ export default function Home() {
 			</section>
 
 			{d && (
+				<Reveal>
 				<section className="grid gap-4 sm:grid-cols-3">
 					{[
 						["Obligaciones on-chain", obs.data?.length ?? "…"],
@@ -93,8 +94,22 @@ export default function Home() {
 						</Tilt>
 					))}
 				</section>
+				<div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-ink-400">
+					<span className="inline-flex items-center gap-2 text-clear-400">
+						<span className="relative flex size-2">
+							<span className="absolute inline-flex size-full animate-ping rounded-full bg-clear-400 opacity-60" />
+							<span className="relative inline-flex size-2 rounded-full bg-clear-400" />
+						</span>
+						Datos en vivo de {d.chainId === 43113 ? "Avalanche Fuji" : d.network}
+					</span>
+					<span className="inline-flex items-center gap-2">
+						SettlementManager <Addr a={d.contracts.settlementManager} />
+					</span>
+				</div>
+				</Reveal>
 			)}
 
+			<Reveal>
 			<section>
 				<div className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-ava-400">Elegí tu rol</div>
 				<div className="grid gap-4 md:grid-cols-3">
@@ -103,7 +118,9 @@ export default function Home() {
 					<RoleCard to="/auditor" icon={<ScanEye className="size-5" />} title="Auditor / regulador" desc="Cargá la viewing key designada y conciliá cada operación: montos reales, escrow vs. liberado, export CSV." cta="Abrir la ventana" />
 				</div>
 			</section>
+			</Reveal>
 
+			<Reveal>
 			<section className="cv-auto grid gap-6 lg:grid-cols-2">
 				<Card className="overflow-hidden">
 					<div className="border-b border-white/[0.06] px-5 py-4">
@@ -153,7 +170,9 @@ export default function Home() {
 					</ol>
 				</Card>
 			</section>
+			</Reveal>
 
+			<Reveal>
 			<section className="cv-auto">
 				<Card className="grid gap-px overflow-hidden bg-white/[0.05] md:grid-cols-3">
 					{[
@@ -170,6 +189,7 @@ export default function Home() {
 					))}
 				</Card>
 			</section>
+			</Reveal>
 		</div>
 	);
 }

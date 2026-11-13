@@ -1,4 +1,4 @@
-import { type HTMLAttributes, type ReactNode, useEffect, useRef } from "react";
+import { type CSSProperties, type HTMLAttributes, type ReactNode, useEffect, useRef } from "react";
 
 const reducedMotion = () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const finePointer = () => typeof window !== "undefined" && window.matchMedia("(pointer: fine)").matches;
@@ -115,6 +115,34 @@ export function usePauseOffscreen<T extends HTMLElement>() {
 		};
 	}, []);
 	return ref;
+}
+
+/** Aparece con un fade + desplazamiento la primera vez que entra en pantalla. */
+export function Reveal({ children, delay = 0, className = "" }: { children: ReactNode; delay?: number; className?: string }) {
+	const ref = useRef<HTMLDivElement>(null);
+	useEffect(() => {
+		const el = ref.current;
+		if (!el) return;
+		if (reducedMotion() || typeof IntersectionObserver === "undefined") {
+			el.classList.add("is-in");
+			return;
+		}
+		const io = new IntersectionObserver(
+			([e]) => {
+				if (!e.isIntersecting) return;
+				el.classList.add("is-in");
+				io.disconnect();
+			},
+			{ rootMargin: "0px 0px -8% 0px" },
+		);
+		io.observe(el);
+		return () => io.disconnect();
+	}, []);
+	return (
+		<div ref={ref} className={`reveal ${className}`} style={delay ? ({ "--reveal-delay": `${delay}ms` } as CSSProperties) : undefined}>
+			{children}
+		</div>
+	);
 }
 
 /** Fondo ambiental: dos auroras desenfocadas que se mueven lento (un solo layer compuesto). */

@@ -185,11 +185,11 @@ export default function Empresa() {
 			<Gate role="empresa pagadora">
 				<div className="space-y-6">
 					<Treasury />
-					<div className="grid gap-6 lg:grid-cols-[400px_1fr]">
+					<div className="grid gap-6 lg:grid-cols-[400px_minmax(0,1fr)]">
 						<div className="lg:sticky lg:top-24 lg:self-start">
 							<NuevaObligacion />
 						</div>
-						<div className="space-y-4">
+						<div className="min-w-0 space-y-4">
 							<div className="flex items-center justify-between">
 								<h2 className="text-sm font-semibold text-white">Mis obligaciones</h2>
 								<span className="text-xs text-ink-400">{mias.length} en total</span>

@@ -42,6 +42,15 @@
 	}
 }
 
+/* Inter variable (subset latino, OFL) servida desde el propio origen: misma tipografía en cualquier equipo, sin CDNs. */
+@font-face {
+	font-family: "Inter";
+	src: url("./assets/inter-var-latin.woff2") format("woff2");
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
 :root {
 	color-scheme: dark;
 }
@@ -227,6 +236,78 @@ body {
 	to { --a: 360deg; }
 }
 
+/* Aparición al entrar en pantalla (ver <Reveal> en fx.tsx). */
+.reveal {
+	opacity: 0;
+	transform: translateY(18px);
+	transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+	transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.is-in {
+	opacity: 1;
+	transform: none;
+}
+
+/* Cambio de ruta: sólo opacidad (un transform acá rompería los position: fixed de los diálogos). */
+.route-in {
+	animation: route-in 0.28s ease-out;
+}
+@keyframes route-in {
+	from { opacity: 0; }
+}
+
+/* Destello que recorre los botones de acción al pasar el puntero. */
+.btn-shine {
+	position: relative;
+	overflow: hidden;
+}
+.btn-shine::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.28) 50%, transparent 65%);
+	transform: translateX(-120%);
+	pointer-events: none;
+}
+.btn-shine:not(:disabled):hover::after {
+	transform: translateX(120%);
+	transition: transform 0.7s ease-out;
+}
+
+/* Gradiente que fluye en la palabra clave del hero. */
+.text-flow {
+	background-image: linear-gradient(90deg, var(--color-ava-300), var(--color-ava-500), var(--color-ava-300), var(--color-ava-600), var(--color-ava-300));
+	background-size: 300% 100%;
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	animation: text-flow 9s linear infinite;
+}
+@keyframes text-flow {
+	to { background-position: -300% 0; }
+}
+
+/* Barra de progreso de lectura bajo el header: animación ligada al scroll, sin JS. */
+.scroll-progress {
+	display: none;
+}
+@supports (animation-timeline: scroll()) {
+	.scroll-progress {
+		display: block;
+		position: absolute;
+		inset: auto 0 -1px 0;
+		height: 2px;
+		transform-origin: 0 50%;
+		transform: scaleX(0);
+		background: linear-gradient(90deg, var(--color-ava-500), var(--color-clear-400));
+		animation: scroll-progress linear both;
+		animation-timeline: scroll(root);
+	}
+}
+@keyframes scroll-progress {
+	to { transform: scaleX(1); }
+}
+
 /* Secciones bajo el pliegue: el navegador no las pinta hasta que se acercan al viewport. */
 .cv-auto {
 	content-visibility: auto;
@@ -246,6 +327,9 @@ body {
 		animation-duration: 0.001ms !important;
 		animation-iteration-count: 1 !important;
 		transition-duration: 0.001ms !important;
+	}
+	.scroll-progress {
+		display: none;
 	}
 }
 

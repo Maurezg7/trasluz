@@ -155,10 +155,13 @@ export function Layout({ children }: { children: ReactNode }) {
 						<ConnectButton />
 					</div>
 				</div>
+				<div className="scroll-progress" aria-hidden="true" />
 			</header>
-			<main className="px-4 py-8 md:px-8 md:py-10">
+			<main className="overflow-x-clip px-4 py-8 md:px-8 md:py-10">
 				<WrongNetwork />
-				<div className="mx-auto max-w-6xl">{children}</div>
+				<div key={loc.pathname} className="route-in mx-auto max-w-6xl">
+					{children}
+				</div>
 			</main>
 			<footer className="mx-auto max-w-6xl px-4 pb-10 text-xs text-ink-400 md:px-8">
 				<div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/[0.06] pt-6">

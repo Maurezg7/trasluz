@@ -37,8 +37,8 @@ export default function Publico() {
 			{!d && <Card className="p-6 text-sm text-ink-300">Sin deployment en esta red.</Card>}
 			{d && (
 				<div className="space-y-6">
-					<div className="grid gap-6 lg:grid-cols-[1fr_420px]">
-						<Card className="overflow-hidden">
+					<div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_420px]">
+						<Card className="min-w-0 overflow-hidden">
 							<CardHeader icon={<Globe2 className="size-4" />} title="Transferencias confidenciales" subtitle="Eventos PrivateTransfer del contrato EncryptedERC" />
 							{q.isLoading && <Skeleton className="m-5 h-40" />}
 							{!q.isLoading && transfers.length === 0 && <Empty icon={<Search className="size-5" />} title="Todavía no hay transferencias" />}
@@ -69,7 +69,7 @@ export default function Publico() {
 							</div>
 						</Card>
 
-						<div className="space-y-6 lg:sticky lg:top-24 lg:self-start">
+						<div className="min-w-0 space-y-6 lg:sticky lg:top-24 lg:self-start">
 							<Card className="overflow-hidden">
 								<CardHeader
 									icon={<LockKeyhole className="size-4" />}
@@ -91,10 +91,10 @@ export default function Publico() {
 											event <span className="text-white">PrivateTransfer</span>(
 										</div>
 										<div className="pl-4">
-											<span className="text-ink-400">from</span> <span className="text-ink-200">{current.from}</span>
+											<span className="text-ink-400">from</span> <span className="break-all text-ink-200">{current.from}</span>
 										</div>
 										<div className="pl-4">
-											<span className="text-ink-400">to</span> <span className="text-ink-200">{current.to}</span>
+											<span className="text-ink-400">to</span> <span className="break-all text-ink-200">{current.to}</span>
 										</div>
 										<div className="pl-4">
 											<span className="text-ink-400">auditorPCT[7]</span>

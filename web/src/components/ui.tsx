@@ -34,7 +34,7 @@ export function Button({
 		<button
 			{...rest}
 			disabled={rest.disabled || loading}
-			className={`inline-flex items-center justify-center gap-2 rounded-xl font-medium transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-45 disabled:active:scale-100 ${sz} ${VARIANTS[variant]} ${className}`}
+			className={`inline-flex items-center justify-center gap-2 rounded-xl font-medium transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-45 disabled:active:scale-100 ${variant === "primary" || variant === "success" ? "btn-shine" : ""} ${sz} ${VARIANTS[variant]} ${className}`}
 		>
 			{loading ? <Loader2 className="size-4 animate-spin" /> : icon}
 			{children}
@@ -139,7 +139,7 @@ export function Addr({ a, label, n = 4 }: { a?: string; label?: string; n?: numb
 				className="size-4 shrink-0 rounded-full ring-1 ring-white/20"
 				style={{ background: `conic-gradient(from ${hue}deg, hsl(${hue} 70% 55%), hsl(${(hue + 120) % 360} 70% 45%), hsl(${hue} 70% 55%))` }}
 			/>
-			<span className="font-mono text-[12.5px] text-ink-200">{label ?? short(a, n)}</span>
+			<span className="whitespace-nowrap font-mono text-[12.5px] text-ink-200">{label ?? short(a, n)}</span>
 			<CopyButton value={a} />
 			{url && (
 				<a href={url} target="_blank" rel="noreferrer" className="text-ink-400 hover:text-white">
