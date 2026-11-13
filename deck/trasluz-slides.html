@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>Trasluz · Liquidación B2B confidencial sobre Avalanche eERC</title>
+<style>
+@font-face { font-family: "Inter"; src: url("slides/inter.woff2") format("woff2"); font-weight: 100 900; }
+@page { size: 1920px 1080px; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; background: #000; }
+body { font-family: "Inter", system-ui, sans-serif; color: #f4f4f8; }
+:root { --ink950:#07070a; --ink850:#101017; --ink800:#15151e; --ink700:#1d1d29; --ink600:#2a2a3a; --ink400:#6b6b80; --ink300:#9a9ab0; --ink200:#c9c9d6; --ava:#e84142; --ava4:#ff5a5f; --clear:#34d399; --cipher:#fbbf24; }
+.mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+section { position: relative; width: 1920px; height: 1080px; overflow: hidden; page-break-after: always; break-after: page; padding: 96px 120px 110px;
+	background: radial-gradient(1100px 620px at 88% -8%, rgba(232,65,66,.20), transparent 62%), radial-gradient(900px 520px at -6% 108%, rgba(52,211,153,.07), transparent 60%), var(--ink950); display: flex; flex-direction: column; }
+section:last-child { page-break-after: auto; break-after: auto; }
+.kicker { font-size: 22px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--ava4); margin-bottom: 22px; }
+h1 { font-size: 68px; line-height: 1.08; font-weight: 800; letter-spacing: -.025em; max-width: 1500px; }
+h1 em, .hl em { font-style: normal; color: var(--clear); }
+h1 b { color: var(--ava4); font-weight: 800; }
+.lead { font-size: 30px; line-height: 1.45; color: var(--ink200); margin-top: 26px; max-width: 1350px; }
+.body { flex: 1; display: flex; flex-direction: column; justify-content: center; margin-top: 44px; }
+.grid { display: grid; gap: 32px; }
+.g2 { grid-template-columns: 1fr 1fr; } .g3 { grid-template-columns: repeat(3,1fr); } .g4 { grid-template-columns: repeat(4,1fr); } .g5 { grid-template-columns: repeat(5,1fr); }
+.card { background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.012)); border: 1px solid var(--ink700); border-radius: 26px; padding: 38px 40px; }
+.card h3 { font-size: 34px; font-weight: 700; letter-spacing: -.01em; margin-bottom: 14px; }
+.card p { font-size: 25px; line-height: 1.45; color: var(--ink200); }
+.card.red { border-color: rgba(232,65,66,.55); box-shadow: inset 0 0 90px rgba(232,65,66,.10); }
+.card.amber { border-color: rgba(251,191,36,.45); box-shadow: inset 0 0 90px rgba(251,191,36,.07); }
+.card.green { border-color: rgba(52,211,153,.45); box-shadow: inset 0 0 90px rgba(52,211,153,.08); }
+.tag { display: inline-block; font-size: 19px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; padding: 8px 16px; border-radius: 999px; margin-bottom: 20px; }
+.tag.red { color: var(--ava4); background: rgba(232,65,66,.14); } .tag.amber { color: var(--cipher); background: rgba(251,191,36,.12); } .tag.green { color: var(--clear); background: rgba(52,211,153,.12); } .tag.gray { color: var(--ink200); background: rgba(255,255,255,.07); }
+.note { margin-top: 36px; font-size: 28px; line-height: 1.4; color: var(--ink200); border-left: 5px solid var(--clear); padding: 6px 0 6px 26px; }
+.note b { color: #fff; }
+footer { position: absolute; left: 120px; right: 120px; bottom: 44px; display: flex; justify-content: space-between; align-items: center; font-size: 20px; color: var(--ink400); }
+footer .brand { display: flex; align-items: center; gap: 14px; color: var(--ink300); font-weight: 600; }
+footer svg { width: 34px; height: 34px; }
+a { color: inherit; text-decoration: none; }
+
+/* portada */
+.cover { justify-content: center; align-items: flex-start; padding-left: 150px; }
+.cover .logo { width: 150px; height: 150px; margin-bottom: 44px; filter: drop-shadow(0 0 60px rgba(232,65,66,.45)); }
+.cover h1 { font-size: 150px; letter-spacing: -.04em; }
+.cover h1 span { color: var(--clear); }
+.cover .sub { font-size: 44px; color: var(--ink200); margin-top: 18px; font-weight: 500; }
+.cover .claim { font-size: 54px; font-weight: 800; letter-spacing: -.02em; margin-top: 70px; line-height: 1.15; }
+.cover .claim em { font-style: normal; color: var(--clear); } .cover .claim b { color: var(--ava4); }
+.chips { display: flex; gap: 16px; margin-top: 64px; }
+.chip { font-size: 23px; font-weight: 600; padding: 12px 24px; border-radius: 999px; border: 1px solid var(--ink600); color: var(--ink200); background: rgba(255,255,255,.03); }
+.chip.live { border-color: rgba(52,211,153,.5); color: var(--clear); }
+
+/* pasos */
+.step { position: relative; }
+.step .n { width: 60px; height: 60px; border-radius: 18px; background: var(--ava); color: #fff; font-size: 30px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-bottom: 22px; }
+.step.aud .n { background: var(--clear); color: #04130d; }
+.step .who { font-size: 19px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--ink300); margin-bottom: 8px; }
+.step h3 { font-size: 30px; } .step p { font-size: 22px; }
+.states { margin-top: 40px; display: flex; align-items: center; gap: 18px; font-size: 24px; color: var(--ink300); flex-wrap: wrap; }
+.st { padding: 10px 22px; border-radius: 12px; border: 1px solid var(--ink600); color: #fff; font-weight: 600; }
+.st.ok { border-color: rgba(52,211,153,.6); color: var(--clear); } .st.no { border-color: rgba(251,191,36,.5); color: var(--cipher); }
+
+/* tabla */
+table { width: 100%; border-collapse: collapse; font-size: 27px; }
+th { text-align: left; font-size: 20px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink300); font-weight: 700; padding: 0 28px 22px; }
+td { padding: 24px 28px; border-top: 1px solid var(--ink700); color: var(--ink200); }
+td:first-child { color: #fff; font-weight: 600; }
+.c { color: var(--cipher); font-weight: 700; } .v { color: var(--clear); font-weight: 700; }
+
+/* demo */
+.shot { border-radius: 22px; overflow: hidden; border: 1px solid var(--ink600); background: #0b0b10; }
+.shot img { display: block; width: 100%; height: 470px; object-fit: cover; object-position: left top; }
+.shot .cap { padding: 22px 28px; font-size: 25px; color: var(--ink200); border-top: 1px solid var(--ink700); }
+.shot .cap b { color: #fff; }
+
+/* arquitectura */
+.arch { display: grid; grid-template-columns: 1.55fr 1fr; gap: 48px; align-items: stretch; }
+.stack { display: flex; flex-direction: column; gap: 0; }
+.box { border: 1px solid var(--ink600); border-radius: 20px; padding: 22px 30px; background: rgba(255,255,255,.025); }
+.box h4 { font-size: 27px; font-weight: 700; margin-bottom: 6px; } .box p { font-size: 21px; color: var(--ink300); line-height: 1.4; }
+.box.ours { border-color: rgba(232,65,66,.6); background: rgba(232,65,66,.07); } .box.off { border-color: rgba(52,211,153,.5); background: rgba(52,211,153,.05); }
+.arrow { text-align: center; color: var(--ink400); font-size: 21px; padding: 9px 0; }
+.arrow b { color: var(--ink300); font-weight: 500; }
+.row2 { display: grid; grid-template-columns: 1.25fr 1fr; gap: 20px; }
+
+/* fuji */
+.addr { font-size: 23px; } .addr td { padding: 17px 24px; } .addr td:last-child { color: var(--clear); }
+.stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-bottom: 26px; }
+.stat { border: 1px solid var(--ink700); border-radius: 20px; padding: 24px 26px; background: rgba(255,255,255,.025); }
+.stat .big { font-size: 58px; font-weight: 800; letter-spacing: -.02em; } .stat .lbl { font-size: 20px; color: var(--ink300); margin-top: 4px; line-height: 1.3; }
+.txs { display: flex; flex-wrap: wrap; gap: 12px; }
+.tx { font-size: 21px; padding: 11px 18px; border-radius: 12px; border: 1px solid var(--ink600); color: var(--ink200); background: rgba(255,255,255,.03); }
+.tx .mono { color: var(--cipher); margin-left: 8px; }
+.sec .card { padding: 30px 34px; } .sec .card h3 { font-size: 29px; margin-bottom: 10px; } .sec .card p { font-size: 22px; }
+.limits { margin-top: 30px; font-size: 22px; color: var(--ink300); line-height: 1.5; } .limits b { color: var(--cipher); }
+.road li { list-style: none; font-size: 27px; line-height: 1.4; color: var(--ink200); padding: 17px 0 17px 44px; border-top: 1px solid var(--ink700); position: relative; }
+.road li:first-child { border-top: 0; } .road li::before { content: ""; position: absolute; left: 6px; top: 31px; width: 14px; height: 14px; border-radius: 50%; background: var(--ava); }
+.road li b { color: #fff; }
+.end { display: flex; flex-direction: column; justify-content: center; }
+.end .claim { font-size: 47px; font-weight: 800; line-height: 1.12; letter-spacing: -.025em; } .end .claim em { font-style: normal; color: var(--clear); } .end .claim b { color: var(--ava4); }
+.end .link { margin-top: 40px; font-size: 30px; color: var(--ink200); } .end .link .mono { color: #fff; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="r" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff5a5f"/><stop offset="1" stop-color="#b3141c"/></linearGradient>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#34d399" stop-opacity="0"/><stop offset=".5" stop-color="#34d399" stop-opacity=".5"/><stop offset="1" stop-color="#34d399" stop-opacity="0"/></linearGradient>
+    <linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#34d399" stop-opacity="0"/><stop offset=".18" stop-color="#6ee7b7"/><stop offset=".82" stop-color="#6ee7b7"/><stop offset="1" stop-color="#34d399" stop-opacity="0"/></linearGradient>
+    <symbol id="logo" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#0e0e13"/><rect x="21" y="9" width="22" height="46" fill="url(#g)"/><rect x="13" y="14" width="16" height="36" rx="5" fill="url(#r)"/><rect x="35" y="14" width="16" height="36" rx="5" fill="url(#r)"/><rect x="30.5" y="8" width="3" height="48" rx="1.5" fill="url(#s)"/></symbol>
+  </defs>
+</svg>
+
+<!-- 1 -->
+<section class="cover">
+  <svg class="logo"><use href="#logo"/></svg>
+  <h1>Trasluz<span>.</span></h1>
+  <p class="sub">Liquidación B2B confidencial sobre Avalanche eERC</p>
+  <p class="claim"><b>Confidencial</b> para el mercado.<br/><em>Transparente</em> para el regulador.</p>
+  <div class="chips"><span class="chip">Track Avalanche · Argentina Space 2026</span><span class="chip live">● En vivo en Avalanche Fuji</span></div>
+</section>
+
+<!-- 2 -->
+<section>
+  <p class="kicker">El problema</p>
+  <h1>Pagar a proveedores on-chain hoy obliga a elegir entre <b>dos males</b></h1>
+  <div class="body">
+    <div class="grid g2">
+      <div class="card red"><span class="tag red">Blockchain pública</span><h3>Todo a la vista</h3><p>Tu competencia ve cuánto le pagás a cada proveedor y reconstruye tus precios, tus márgenes y tu flujo de caja.</p></div>
+      <div class="card amber"><span class="tag amber">Privacidad total</span><h3>Auditoría imposible</h3><p>Si nadie puede ver los montos, el regulador tampoco. Ningún banco ni empresa regulada puede adoptar un riel así.</p></div>
+    </div>
+    <p class="note">Una empresa necesita <b>las dos cosas a la vez</b>: que el mercado no vea sus montos y que su auditor sí.</p>
+  </div>
+  <footer><span class="brand"><svg><use href="#logo"/></svg>Trasluz</span><span>2 / 10</span></footer>
+</section>
+
+<!-- 3 -->
+<section>
+  <p class="kicker">La solución</p>
+  <h1>Pago contra entrega con <em>montos cifrados</em> y una ventana para el auditor</h1>
+  <div class="body">
+    <div class="grid g4">
+      <div class="card"><span class="tag red">Escrow</span><h3>Contra entrega</h3><p>Un vault por obligación. El pago se libera sólo cuando el proveedor confirma la entrega.</p></div>
+      <div class="card"><span class="tag amber">Confidencial</span><h3>Monto cifrado</h3><p>eERC oficial de Ava Labs: ElGamal y pruebas Groth16 generadas en el navegador.</p></div>
+      <div class="card"><span class="tag green">Auditable</span><h3>Viewing key</h3><p>El auditor designado descifra cada operación y concilia lo fondeado contra lo liberado.</p></div>
+      <div class="card"><span class="tag gray">KYC</span><h3>Riel habilitado</h3><p>Sólo las entidades de la allowlist pueden crear y cobrar obligaciones.</p></div>
+    </div>
+    <p class="note">El diferenciador del eERC no es la privacidad: es la <b>auditabilidad selectiva</b>.</p>
+  </div>
+  <footer><span class="brand"><svg><use href="#logo"/></svg>Trasluz</span><span>3 / 10</span></footer>
+</section>
+
+<!-- 4 -->
+<section>
+  <p class="kicker">Cómo funciona</p>
+  <h1>Cinco pasos, <em>cero montos en claro</em> on-chain</h1>
+  <div class="body">
+    <div class="grid g5" style="gap:22px">
+      <div class="card step"><div class="n">1</div><p class="who">Empresa</p><h3>Crea</h3><p>La obligación nace con un vault de escrow propio, registrado en eERC.</p></div>
+      <div class="card step"><div class="n">2</div><p class="who">Empresa</p><h3>Fondea</h3><p>Transferencia confidencial al vault, con una prueba ZK.</p></div>
+      <div class="card step"><div class="n">3</div><p class="who">Proveedor</p><h3>Confirma</h3><p>Descifra el saldo del vault, verifica el monto y confirma la entrega.</p></div>
+      <div class="card step"><div class="n">4</div><p class="who">Empresa</p><h3>Libera</h3><p>El vault paga al proveedor. El destino lo fija el contrato.</p></div>
+      <div class="card step aud green"><div class="n">5</div><p class="who">Auditor</p><h3>Concilia</h3><p>Con su viewing key ve los montos reales: fondeado = liberado.</p></div>
+    </div>
+    <div class="states"><span>Estados:</span><span class="st">Creada</span>→<span class="st">Fondeada</span>→<span class="st ok">Liberada</span><span style="margin-left:26px">Sin entrega confirmada:</span><span class="st no">Cancelada</span>→<span>reembolso al pagador</span></div>
+  </div>
+  <footer><span class="brand"><svg><use href="#logo"/></svg>Trasluz</span><span>4 / 10</span></footer>
+</section>
+
+<!-- 5 -->
+<section>
+  <p class="kicker">Quién ve qué</p>
+  <h1>El mismo dato, <em>tres miradas</em></h1>
+  <div class="body">
+    <div class="card" style="padding:40px 22px 16px">
+      <table>
+        <tr><th>Dato</th><th>Mercado / Snowtrace</th><th>Proveedor</th><th>Auditor designado</th></tr>
+        <tr><td>Pagador, proveedor, estado y fechas</td><td>visible</td><td>visible</td><td>visible</td></tr>
+        <tr><td>Monto de cada pago</td><td class="c">ciphertext</td><td>el suyo</td><td class="v">descifrado</td></tr>
+        <tr><td>Saldos y flujo de caja</td><td class="c">ciphertext</td><td>el suyo</td><td class="v">conciliable</td></tr>
+        <tr><td>Factura</td><td>sólo un hash</td><td>hash</td><td>hash</td></tr>
+        <tr><td>Depósito y retiro de USDC (rampa)</td><td>visible</td><td>visible</td><td>visible</td></tr>
+      </table>
+    </div>
+  </div>
+  <footer><span class="brand"><svg><use href="#logo"/></svg>Trasluz</span><span>5 / 10</span></footer>
+</section>
+
+<!-- 6 -->
+<section>
+  <p class="kicker">Demo en Fuji</p>
+  <h1>La misma transferencia, vista <em>al trasluz</em></h1>
+  <div class="body" style="margin-top:36px">
+    <div class="grid g2">
+      <div class="shot"><img src="slides/publico-crop.png" alt="Vista pública"/><p class="cap"><span class="tag amber" style="margin:0 14px 0 0">Mercado</span>Ve quién pagó y cuándo. El monto es <b>ciphertext</b>.</p></div>
+      <div class="shot" style="border-color:rgba(52,211,153,.5)"><img src="slides/auditor-crop.png" alt="Portal del auditor"/><p class="cap"><span class="tag green" style="margin:0 14px 0 0">Auditor</span>Descifra <b>18.750,25 USDC</b> y concilia 2 de 2.</p></div>
+    </div>
+  </div>
+  <footer><span class="brand"><svg><use href="#logo"/></svg>Trasluz</span><span>6 / 10</span></footer>
+</section>
+
+<!-- 7 -->
+<section>
+  <p class="kicker">Arquitectura</p>
+  <h1>Componemos sobre el estándar: <em>no tocamos la criptografía</em></h1>
+  <div class="body" style="margin-top:36px">
+    <div class="arch">
+      <div class="stack">
+        <div class="box"><h4>Frontend React + wagmi</h4><p>Empresa · Proveedor · Auditor · Vista pública. Pruebas Groth16 en un Web Worker.</p></div>
+        <div class="arrow">↓</div>
+        <div class="row2">
+          <div class="box ours"><h4>SettlementManager.sol</h4><p>Allowlist KYC, estados, CEI + nonReentrant. Eventos y reverts sin montos.</p></div>
+          <div class="box ours"><h4>EscrowVault</h4><p>Un clon EIP-1167 por obligación. Sólo obedece al manager.</p></div>
+        </div>
+        <div class="arrow">↓ <b>transfer confidencial</b></div>
+        <div class="box off"><h4>EncryptedERC oficial · converter mode</h4><p>Sin modificar: Registrar, verifiers Groth16 de producción y auditor designado.</p></div>
+        <div class="arrow">↓</div>
+        <div class="box"><h4>Mock USDC en Avalanche Fuji</h4></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <div class="card red" style="flex:1"><span class="tag red">Decisión clave</span><h3>Un vault eERC por obligación</h3><p>En eERC sólo mueve fondos quien conoce la clave del emisor. Cada vault tiene su propia clave, pero <b style="color:#fff">esa clave no autoriza gastos</b>: el destino lo fija el contrato.</p></div>
+        <div class="card green"><span class="tag green">Portal auditor</span><p>100 % local: descifra cada <span class="mono">PrivateTransfer</span>, concilia y exporta CSV.</p></div>
+      </div>
+    </div>
+  </div>
+  <footer><span class="brand"><svg><use href="#logo"/></svg>Trasluz</span><span>7 / 10</span></footer>
+</section>
+
+<!-- 8 -->
+<section>
+  <p class="kicker">Desplegado</p>
+  <h1>En vivo en <em>Avalanche Fuji</em>, verificable en Snowtrace</h1>
+  <div class="body" style="margin-top:34px">
+    <div class="grid" style="grid-template-columns:1.25fr 1fr;gap:40px;align-items:start">
+      <div class="card" style="padding:26px 14px 12px">
+        <table class="addr">
+          <tr><td>SettlementManager</td><td class="mono"><a href="https://testnet.snowtrace.io/address/0xDAe1bA1e0FDFb5c34bB894120eBe8Cd114e05592">0xDAe1bA1e0FDFb5c34bB894120eBe8Cd114e05592</a></td></tr>
+          <tr><td>EncryptedERC</td><td class="mono"><a href="https://testnet.snowtrace.io/address/0x8391B1756A7fe2aCE4246aBe1b9cB5Eb08607713">0x8391B1756A7fe2aCE4246aBe1b9cB5Eb08607713</a></td></tr>
+          <tr><td>Registrar</td><td class="mono"><a href="https://testnet.snowtrace.io/address/0x0564C86206A20D721D54FDdC12528E462769D822">0x0564C86206A20D721D54FDdC12528E462769D822</a></td></tr>
+          <tr><td>Mock USDC</td><td class="mono"><a href="https://testnet.snowtrace.io/address/0xE8adcE9391B2F06517738e654b32DBbCb07E30A6">0xE8adcE9391B2F06517738e654b32DBbCb07E30A6</a></td></tr>
+          <tr><td>Auditor designado</td><td class="mono"><a href="https://testnet.snowtrace.io/address/0x8C6861bb10dfF6fD2eC115ddF5dE369aCC68a185">0x8C6861bb10dfF6fD2eC115ddF5dE369aCC68a185</a></td></tr>
+        </table>
+      </div>
+      <div>
+        <div class="stats">
+          <div class="stat"><div class="big">11</div><div class="lbl">contratos desplegados</div></div>
+          <div class="stat"><div class="big" style="color:var(--clear)">2/2</div><div class="lbl">obligaciones conciliadas</div></div>
+          <div class="stat"><div class="big">22</div><div class="lbl">tests con pruebas ZK reales</div></div>
+        </div>
+        <p style="font-size:22px;color:var(--ink300);margin-bottom:14px">Obligación #2 · 18.750,25 USDC · transacciones:</p>
+        <div class="txs">
+          <a class="tx" href="https://testnet.snowtrace.io/tx/0x737ff065404a7597b47d252860122100c13e2b8dac93841cee291f393be645ba">Depósito<span class="mono">0x737f…45ba</span></a>
+          <a class="tx" href="https://testnet.snowtrace.io/tx/0x79b415769764a6e75124bf2d1d3c3a448d41aa6125038d91ee57b9098e8c67b9">Crear<span class="mono">0x79b4…67b9</span></a>
+          <a class="tx" href="https://testnet.snowtrace.io/tx/0x2d9e2f41d352046204cdecee6a698684128bebeaa5d0c78f99cdb02c291710ef">Fondeo<span class="mono">0x2d9e…10ef</span></a>
+          <a class="tx" href="https://testnet.snowtrace.io/tx/0x3195ec002c032353257c4a3d596772fb4f7d019721383dc9c7ea05283ec5bca1">Entrega<span class="mono">0x3195…bca1</span></a>
+          <a class="tx" href="https://testnet.snowtrace.io/tx/0xdb084b1e6d703a15e141279a3d4e0beec6c214bf434bb7e408e401066483b932">Liberación<span class="mono">0xdb08…b932</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer><span class="brand"><svg><use href="#logo"/></svg>Trasluz</span><span>8 / 10</span></footer>
+</section>
+
+<!-- 9 -->
+<section class="sec">
+  <p class="kicker">Seguridad</p>
+  <h1>Pensado para que un equipo de compliance <em>lo pueda aprobar</em></h1>
+  <div class="body" style="margin-top:34px">
+    <div class="grid g3" style="gap:24px">
+      <div class="card"><h3>Sin cripto propia</h3><p>eERC oficial copiado byte a byte, con verifiers y zkeys de la ceremonia de Ava Labs.</p></div>
+      <div class="card"><h3>Sin fugas de monto</h3><p>Ninguna función recibe montos. Los tests escanean eventos y calldata.</p></div>
+      <div class="card"><h3>Escrow sin desvío</h3><p>El destino lo fija el contrato y eERC valida la clave del receptor en la prueba.</p></div>
+      <div class="card"><h3>Sin doble liberación</h3><p>Checks-effects-interactions y nonReentrant. El vault queda en cero.</p></div>
+      <div class="card"><h3>Sin reembolso tras la entrega</h3><p>El pagador sólo recupera fondos de una obligación cancelada.</p></div>
+      <div class="card"><h3>Viewing key en runtime</h3><p>Se carga en el portal, vive en memoria y se valida contra el contrato.</p></div>
+    </div>
+    <p class="limits"><b>Limitaciones declaradas:</b> la allowlist KYC es manual · depósitos y retiros de USDC son públicos (es la rampa ERC-20) · un pago parcial no se puede impedir on-chain: el auditor lo marca como remanente.</p>
+  </div>
+  <footer><span class="brand"><svg><use href="#logo"/></svg>Trasluz</span><span>9 / 10</span></footer>
+</section>
+
+<!-- 10 -->
+<section>
+  <p class="kicker">Lo que sigue</p>
+  <div class="grid" style="grid-template-columns:1fr 1.05fr;gap:80px;flex:1;align-items:center">
+    <div>
+      <h1 style="font-size:56px;margin-bottom:26px">Roadmap</h1>
+      <ul class="road">
+        <li><b>L1 permisionada</b> de Avalanche: la allowlist gatea también el token, no sólo el riel.</li>
+        <li><b>Safe multisig + timelock</b> como owner de la allowlist.</li>
+        <li><b>KYC real</b> con un proveedor de identidad.</li>
+        <li><b>Plazos con auto-reembolso</b> y liberación firmada por el proveedor.</li>
+        <li><b>Mainnet C-Chain</b> con USDC nativo.</li>
+      </ul>
+    </div>
+    <div class="end">
+      <svg style="width:110px;height:110px;margin-bottom:36px;filter:drop-shadow(0 0 50px rgba(232,65,66,.45))"><use href="#logo"/></svg>
+      <p class="claim"><b>Confidencial</b> para el mercado.<br/><em>Transparente</em> para el regulador.</p>
+      <p class="link">Código: <a class="mono" href="https://github.com/Maurezg7/trasluz">github.com/Maurezg7/trasluz</a></p>
+    </div>
+  </div>
+  <footer><span class="brand"><svg><use href="#logo"/></svg>Trasluz</span><span>10 / 10</span></footer>
+</section>
+
+</body>
+</html>
