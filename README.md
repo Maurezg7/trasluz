@@ -149,6 +149,28 @@ pnpm build                     # frontend estático en web/dist (servir con cual
 
 Para habilitar entidades: `KYC_ADDRESSES=0x..,0x..` en el deploy o desde **Administración** en la app (owner).
 
+### Desplegado en Fuji (chain 43113)
+
+Deploy en el bloque `60977616`. Las direcciones completas (verifiers, BabyJubJub, implementación del vault) están en [`addresses.json`](addresses.json).
+
+| Contrato | Dirección |
+|---|---|
+| SettlementManager | [`0xDAe1bA1e0FDFb5c34bB894120eBe8Cd114e05592`](https://testnet.snowtrace.io/address/0xDAe1bA1e0FDFb5c34bB894120eBe8Cd114e05592) |
+| EncryptedERC (oficial, converter mode) | [`0x8391B1756A7fe2aCE4246aBe1b9cB5Eb08607713`](https://testnet.snowtrace.io/address/0x8391B1756A7fe2aCE4246aBe1b9cB5Eb08607713) |
+| Registrar (oficial) | [`0x0564C86206A20D721D54FDdC12528E462769D822`](https://testnet.snowtrace.io/address/0x0564C86206A20D721D54FDdC12528E462769D822) |
+| Mock USDC | [`0xE8adcE9391B2F06517738e654b32DBbCb07E30A6`](https://testnet.snowtrace.io/address/0xE8adcE9391B2F06517738e654b32DBbCb07E30A6) |
+| Auditor designado | [`0x8C6861bb10dfF6fD2eC115ddF5dE369aCC68a185`](https://testnet.snowtrace.io/address/0x8C6861bb10dfF6fD2eC115ddF5dE369aCC68a185) |
+
+Flujo end-to-end de `pnpm e2e:fuji` (obligación #2 por 18.750,25 USDC; en el explorer el monto es ciphertext y el auditor concilia fondeado = liberado):
+[depósito](https://testnet.snowtrace.io/tx/0x737ff065404a7597b47d252860122100c13e2b8dac93841cee291f393be645ba) ·
+[crear](https://testnet.snowtrace.io/tx/0x79b415769764a6e75124bf2d1d3c3a448d41aa6125038d91ee57b9098e8c67b9) ·
+[fondeo confidencial](https://testnet.snowtrace.io/tx/0x2d9e2f41d352046204cdecee6a698684128bebeaa5d0c78f99cdb02c291710ef) ·
+[fondear](https://testnet.snowtrace.io/tx/0x3f8ea0222bed78cd344ad1ef38aa2204d06fa866418b5044261c3a1da3085533) ·
+[confirmar entrega](https://testnet.snowtrace.io/tx/0x3195ec002c032353257c4a3d596772fb4f7d019721383dc9c7ea05283ec5bca1) ·
+[liberar](https://testnet.snowtrace.io/tx/0xdb084b1e6d703a15e141279a3d4e0beec6c214bf434bb7e408e401066483b932)
+
+El RPC oficial de Fuji (`api.avax-test.network`) limita `eth_getLogs` a 100 bloques por request: `e2e.ts` lee los eventos de a 100 y el frontend usa por defecto `avalanche-fuji-c-chain-rpc.publicnode.com`, que admite sus tramos de 2048.
+
 ## Estructura
 
 ```

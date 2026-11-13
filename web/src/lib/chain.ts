@@ -41,7 +41,7 @@ type LogRange = { fromBlock: bigint; toBlock: bigint };
 
 /**
  * getLogs incremental con cache en memoria: la primera vez escanea desde el bloque de deploy
- * en tramos de 2048 (límite del RPC público de Fuji); después sólo pide los bloques nuevos.
+ * en tramos de 2048 (admitidos por el RPC de Fuji configurado); después sólo pide los bloques nuevos.
  * Si la cadena retrocede (nodo local reiniciado / reorg), se descarta la cache.
  */
 const logCache = new Map<string, { to: bigint; logs: unknown[] }>();

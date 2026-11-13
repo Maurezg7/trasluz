@@ -37,6 +37,9 @@ export const chains = (() => {
 
 export const getDeployment = (chainId?: number) => (chainId ? deployments[String(chainId)] : undefined);
 
+// api.avax-test.network limita getLogs a 100 bloques por request; este RPC público admite los tramos de 2048 de lib/chain.ts.
+const FUJI_RPC = "https://avalanche-fuji-c-chain-rpc.publicnode.com";
+
 const projectId = import.meta.env.VITE_WALLETCONNECT_PROJECT_ID as string | undefined;
 
 // Wallets instaladas: descubiertas por EIP-6963 (multiInjectedProviderDiscovery) + injected genérico.
@@ -54,7 +57,7 @@ export const wagmiConfig = createConfig({
 	multiInjectedProviderDiscovery: true,
 	// JSON-RPC batch: las lecturas en paralelo viajan en un solo request HTTP.
 	transports: Object.fromEntries(
-		chains.map((c) => [c.id, http(c.id === avalancheFuji.id ? import.meta.env.VITE_FUJI_RPC_URL || undefined : undefined, { batch: { wait: 16 } })]),
+		chains.map((c) => [c.id, http(c.id === avalancheFuji.id ? import.meta.env.VITE_FUJI_RPC_URL || FUJI_RPC : undefined, { batch: { wait: 16 } })]),
 	),
 	ssr: false,
 });

@@ -30,6 +30,7 @@ async function main() {
 	const core = attachCore(d.contracts, d.deployBlock, deployer);
 	const link = (h: string) => (d.explorer ? `${d.explorer}/tx/${h}` : h);
 	const isLocal = d.chainId === 31337;
+	const bloqueInicial = await ethers.provider.getBlockNumber();
 
 	// Wallets demo: en local las cuentas de hardhat; en Fuji, wallets efímeras fondeadas por el deployer.
 	const demoWallet = async (name: string, idx: number): Promise<Signer> => {
@@ -95,7 +96,13 @@ async function main() {
 	console.log(`  saldo eERC del proveedor (descifrado por él): ${fmt((await readBalance(core, pa, kpP)).balance)}`);
 
 	step(7, "Vista PÚBLICA (lo que ve cualquiera en el explorer)");
-	const logs = await core.eerc.queryFilter(core.eerc.filters.PrivateTransfer(), d.deployBlock);
+	// El RPC público de Fuji limita getLogs a 100 bloques por request: se lee por tramos desde el inicio de esta corrida.
+	const TRAMO = 100;
+	const ultimo = await ethers.provider.getBlockNumber();
+	const logs = [];
+	for (let b = bloqueInicial; b <= ultimo; b += TRAMO) {
+		logs.push(...(await core.eerc.queryFilter(core.eerc.filters.PrivateTransfer(), b, Math.min(b + TRAMO - 1, ultimo))));
+	}
 	const mine = logs.filter((x) => [prep.vault, pa].includes(x.args.to) && [ea, prep.vault].includes(x.args.from));
 	for (const x of mine) {
 		console.log(`  ${x.args.from.slice(0, 10)}… → ${x.args.to.slice(0, 10)}…  monto: 0x${x.args.auditorPCT[0].toString(16).slice(0, 24)}… (ciphertext)`);

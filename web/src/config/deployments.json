@@ -1,1 +1,24 @@
-{}
+{
+  "43113": {
+    "network": "fuji",
+    "chainId": 43113,
+    "deployBlock": 60977616,
+    "deployedAt": "2026-11-13T01:48:54.497Z",
+    "explorer": "https://testnet.snowtrace.io",
+    "owner": "0xEb6538ba1e3C4d63EABBf7F720AAE3f1d40566B0",
+    "auditor": "0x8C6861bb10dfF6fD2eC115ddF5dE369aCC68a185",
+    "contracts": {
+      "registrar": "0x0564C86206A20D721D54FDdC12528E462769D822",
+      "encryptedERC": "0x8391B1756A7fe2aCE4246aBe1b9cB5Eb08607713",
+      "usdc": "0xE8adcE9391B2F06517738e654b32DBbCb07E30A6",
+      "settlementManager": "0xDAe1bA1e0FDFb5c34bB894120eBe8Cd114e05592",
+      "vaultImplementation": "0xF499575D18a6fA877aab5f47b425e659fD7F67D6",
+      "babyJubJub": "0xE28013a1BcEbA0ce7DF01f11016061a1c0599869",
+      "registrationVerifier": "0xaD1f0E4c35f609A1C1449c078DB34a51733b16c4",
+      "mintVerifier": "0xD95036C1ee8e73300B3b5D33d6286123A85AF615",
+      "withdrawVerifier": "0x3620Ca97524F714Bf08f6f024EB888080Dd2f68A",
+      "transferVerifier": "0xfAc827fE7998711894f7d5BFD4DBBdC319D3e2c1",
+      "burnVerifier": "0x28Ff247BbCbA5192235dA3e0C7319492682fE7d7"
+    }
+  }
+}

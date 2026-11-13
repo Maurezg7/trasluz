@@ -3,7 +3,7 @@
  * CSP estricta: sin scripts inline ni eval. `wasm-unsafe-eval` es lo mínimo para compilar
  * los circuitos WebAssembly; `blob:` en worker-src lo usa el prover multihilo de snarkjs.
  */
-const RPCS = ["https://api.avax-test.network", "https://api.avax.network"];
+const RPCS = ["https://api.avax-test.network", "https://api.avax.network", "https://avalanche-fuji-c-chain-rpc.publicnode.com"];
 const WALLETCONNECT = [
 	"https://*.walletconnect.com",
 	"wss://*.walletconnect.com",
