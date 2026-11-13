@@ -6,7 +6,8 @@
 <p align="center"><b>Liquidación B2B confidencial sobre Avalanche eERC, con ventana para el regulador.</b><br/>
 Track Avalanche · Argentina Space 2026</p>
 
-<p align="center"><b>Demo en vivo (Avalanche Fuji): <a href="https://trasluz-2av.pages.dev">trasluz-2av.pages.dev</a></b></p>
+<p align="center"><b>Demo en vivo (Avalanche Fuji): <a href="https://trasluz-2av.pages.dev">trasluz-2av.pages.dev</a></b><br/>
+<b>Video (1 min): <a href="https://youtu.be/mCyKS2ra7PA">youtu.be/mCyKS2ra7PA</a></b></p>
 
 ---
 
