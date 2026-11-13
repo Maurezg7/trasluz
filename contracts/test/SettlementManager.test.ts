@@ -236,6 +236,23 @@ describe("Trasluz · SettlementManager sobre eERC oficial", () => {
 		});
 	});
 
+	describe("liberación parcial", () => {
+		it("tras la entrega confirmada el pagador no puede reembolsarse el remanente", async () => {
+			const ob = await crearObligacion(empresa, proveedor, "FAC-PARCIAL");
+			await privateTransfer(core, empresa, kp[empresa.address], ob.vault, USDC(500));
+			await (await core.manager.connect(empresa).fondear(ob.id)).wait();
+			await (await core.manager.connect(proveedor).confirmarEntrega(ob.id)).wait();
+			const parcial = await proveVaultTransfer(core, ob.vaultKp, ob.vault, proveedor.address, USDC(1));
+			await (await core.manager.connect(empresa).liberar(ob.id, parcial.proof, parcial.balancePCT as never)).wait();
+			const resto = await proveVaultTransfer(core, ob.vaultKp, ob.vault, empresa.address);
+			await expect(core.manager.connect(empresa).reembolsar(ob.id, resto.proof, resto.balancePCT as never)).to.be.revertedWithCustomError(
+				core.manager,
+				"EstadoInvalido",
+			);
+			expect((await readBalance(core, ob.vault, ob.vaultKp)).balance).to.equal(USDC(499));
+		});
+	});
+
 	describe("confidencialidad y auditoría", () => {
 		const wordsOf = (hex: string) => {
 			const h = hex.startsWith("0x") ? hex.slice(2) : hex;

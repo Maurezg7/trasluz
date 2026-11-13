@@ -80,7 +80,8 @@ así que "el escrow" no puede ser simplemente el SettlementManager. La solución
 5. Un vault por obligación ⇒ los fondos de una obligación nunca se mezclan con otra.
 
 Máquina de estados: `Creada → Fondeada → (entrega confirmada) → Liberada`, y `Cancelada` sólo si
-no hubo entrega confirmada. El reembolso devuelve el saldo del vault al pagador.
+no hubo entrega confirmada. El reembolso devuelve el saldo del vault al pagador y sólo existe en
+`Cancelada`: después de `Liberada` el pagador no puede recuperar nada del escrow.
 
 ### Quién ve qué
 
@@ -108,7 +109,7 @@ no hubo entrega confirmada. El reembolso devuelve el saldo del vault al pagador.
 | Montos de depósito/retiro | Son públicos por diseño del converter (es la rampa ERC-20). La confidencialidad está en las transferencias. Recomendación: depósitos de tesorería agregados, no por factura. |
 | Ciphertexts deterministas en deposit | Limitación documentada upstream (`BabyJubJub.encrypt` usa aleatoriedad fija en el contrato). Mitigado porque las cuentas reciben transferencias privadas con aleatoriedad real. |
 | Trusted setup (Groth16) | Se usa la ceremonia oficial de ava-labs; no hay ceremonia propia. |
-| Pago parcial | El pagador podría liberar menos que lo fondeado; el remanente queda en el vault (reembolsable) y el **auditor lo marca** como "Remanente" en la conciliación. |
+| Pago parcial | El monto es confidencial, así que el contrato no puede exigir que se libere todo. Si el pagador libera menos que lo fondeado, el remanente queda en el vault y **no es reembolsable** (no gana nada reteniéndolo), y el **auditor lo marca** como "Remanente" en la conciliación. |
 
 ## Quickstart (local)
 

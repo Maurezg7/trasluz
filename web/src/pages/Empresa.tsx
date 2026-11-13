@@ -153,7 +153,7 @@ function MiObligacion({ o }: { o: Obligacion }) {
 			</Button>,
 		);
 	}
-	if ((o.estado === "Cancelada" || o.estado === "Liberada") && enVault > 0n) {
+	if (o.estado === "Cancelada" && enVault > 0n) {
 		acciones.push(
 			<Button key="r" size="sm" variant="secondary" icon={<Undo2 className="size-3.5" />} onClick={() => run("Reembolsar escrow", (s) => reembolsar(ctx, keyPair, o.id, o.vault, o.pagador, s), "El saldo del vault volvió a tu tesorería.")}>
 				Reembolsar {fmtUSDC(enVault)}

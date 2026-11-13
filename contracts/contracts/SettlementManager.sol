@@ -254,14 +254,15 @@ contract SettlementManager is Ownable2Step, ReentrancyGuard {
         _emitEstado(id);
     }
 
-    /// @notice Devuelve al pagador lo que quede en el vault (cancelada o remanente post-liberación).
+    /// @notice Devuelve al pagador el saldo del vault de una obligación cancelada.
+    /// @dev Nunca tras `Liberada`: con la entrega confirmada el escrow ya no vuelve al pagador.
     function reembolsar(
         uint256 id,
         TransferProof calldata proof,
         uint256[7] calldata balancePCT
     ) external nonReentrant soloPagador(id) {
         Obligacion storage o = _obligaciones[id];
-        if (o.estado != Estado.Cancelada && o.estado != Estado.Liberada) revert EstadoInvalido();
+        if (o.estado != Estado.Cancelada) revert EstadoInvalido();
         EscrowVault(o.vault).transferir(o.pagador, _tokenId(), proof, balancePCT);
     }
 
